@@ -1,26 +1,8 @@
 # Getting started
 
-Setting up you VS Code
-
-I would propose the following extensions:
-
-- Auto Close Tag
-- Auto Rename Tag
-- CodeMetrics
-- Git Blame
-- Git Lens
-- Live Share
-- Prettier
-- Rainbow Brackets
-- SCS IntelliSense
-- solidity
-
-- TSLint
-- Visual Studio IntelliCode
-
 ## Installing
 
-install node so you automatically get npm as your package manager
+install `node` so you automatically get npm as your package manager
 
 whenever you get an error, try finding out the main message and then google it
 
