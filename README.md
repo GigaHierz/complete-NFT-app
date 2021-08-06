@@ -206,7 +206,7 @@ then you want to add to the `module.exports`in the `truffle-config.js` the Rinke
   }
 ```
 
-[Here](https://www.trufflesuite.com/guides/using-infura-custom-provider) you can find more info on how to connect your Dapp createt with the truffel framework to a testnet with infura.
+[Here](https://www.trufflesuite.com/guides/using-infura-custom-provider) you can find more info on how to connect your DAPP created with the truffel framework to a testnet with infura.
 
 to deploy the contract to rinkeby testnetwork
 `truffle migrate --reset --network rinkeby`
