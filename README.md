@@ -1,5 +1,7 @@
 # Getting started
 
+This project set up is based on this [Video](https://www.youtube.com/watch?v=WsZyb2T83lo&t=1s) by EatTheBlocks. I was actually unable to find the source code so I set this up here.
+
 ## Installing
 
 install `node` so you automatically get npm as your package manager
