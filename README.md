@@ -155,26 +155,43 @@ so as you already got node.js make sure to install `web3.js` as well
 
 `npm install web3`
 
-then you need to add this informaiton to the header of your `tuffel-config.js` file should look like this:
+### get MetaMaskWallet
+
+Next step would be to create a Wallet on MetaMask. I have one for real stuff and one for development.
+It's just safer, as you are trying out stuff and you don't want to lose real ETH.
+
+So form this Wallet that you have just created, you can copy the secret PassPhrase (Mnemonic) and save it in a file calle `.secret`that you add to the directory. It should be on the same level as your `truffle-config.js` file.
+
+### Get FakeEth for TestNetwork
+
+Next thing you would need to do before deploying your smart Contract, is to send some fake ether to your wallet. In this example we use the Ropsten Testnet, so you should use a [faucet](https://faucet.ropsten.be/) to get some.
+
+### Infura
+
+Then you need to register on Infura. There you go to the Menupont `Ethereum` where you can register 3 projects for free.
+You will need to choose an Endpoint. Choose "Ropsten" and copy the URL of your project.
+
+then you need to add this information to the header of your `tuffel-config.js` file should look like this:
 
 ```
-1. const HDWalletProvider = requie('@truffle/hdwalletprovider');
-2. const mnemonic = 'Amphibious Witches Relished Sour Bacon Wholeheartedly However Mosquitoes Circulated Invisible Skirts Boorishly';
-```
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const infuraURL = 'https://ropsten.infura.io/v3/<YOUR-PROJECT-ID>'
 
-create your own mneomic scentence. (you can do it online for teststuff but I guess when you go real it should be safe)
+const fs = require('fs');
+const mnemonic = fs.readFileSync(".secret").toString().trim();
+```
 
 ```
 
 Warning: In production, we highly recommend storing the mnemonic in another (secret) file, to reduce the risk of the mnemonic becoming known. If someone knows your mnemonic, they have all of your addresses and private keys!
 
-If you would use privae keys:
+If you would use private keys:
 
 
 NOTE: This is just an example. NEVER hard code production/mainnet private keys in your code or commit them to git. They should always be loaded from environment variables or a secure secret management system.
 ```
 
-then you want to add to the `module.exports`in the `truffle-config.js` the Rinkeby test network
+then you want to add to the `module.exports`in the `truffle-config.js` the Ropsten test network
 
 ```
 
@@ -191,25 +208,23 @@ then you want to add to the `module.exports`in the `truffle-config.js` the Rinke
     //    network_id: "*"
     //  }
 
-    rinkeby: {
-      provider: () => new HDWalletProvider(
-        mnemonic,
-        // here you add the url to a infura node. For that you need to create an account in infura and then create a project there.
-        // In the settings of the Infura project you need to choose as an enpoint the rinkeyby tesnet and then take the key and add it here as URL
-        'https://rinkeby.infura.io/v3/1ee87164e7b1448daed738352cb48e5d',
-        0,
-        1 // generate one address from this mnemonic
-      ),
-      network_id: 4, // rinkeby
-      skipDryRun: true
-    }
+    ropsten: {
+      provider: () => new HDWalletProvider(mnemonic, infuraURL),
+      network_id: 3,       // Ropsten's id
+      gas: 5500000,        // Ropsten has a lower block limit than mainnet
+      confirmations: 2,    // # of confs to wait between deployments. (default: 0)
+      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    },
+
+
   }
 ```
 
 [Here](https://www.trufflesuite.com/guides/using-infura-custom-provider) you can find more info on how to connect your DAPP created with the truffel framework to a testnet with infura.
 
-to deploy the contract to rinkeby testnetwork
-`truffle migrate --reset --network rinkeby`
+to deploy the contract to ropsten testnetwork
+`truffle migrate --reset --network ropsten`
 
 and here i am Stuck... So far.
 

@@ -1,8 +1,8 @@
-const ConvertLib = artifacts.require("ConvertLib");
-const MetaCoin = artifacts.require("NFT");
+// const ConvertLib = artifacts.require("ConvertLib");
+const NFT = artifacts.require("NFT");
 
 module.exports = function (deployer) {
-  await deployer.deploy(ConvertLib);
-  const nft = await NFT.deployed();
-  await nft.min(accounts[0]);
+  deployer.deploy(NFT);
+  // const nft = NFT.deployed();
+  // nft.min(accounts[0]);
 };
